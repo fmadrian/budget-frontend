@@ -1,4 +1,4 @@
-const SERVER_URL = `localhost:8080`;
+const SERVER_URL = `http://localhost:8080`;
 const API_BASE_URL = `${SERVER_URL}/api/v0`;
 
 const API_SUBENDPOINTS = {
@@ -18,12 +18,15 @@ export const API_ENDPOINTS = {
     create: `${API_SUBENDPOINTS.itemSubcategory}`,
     update: `${API_SUBENDPOINTS.itemSubcategory}`,
     search: `${API_SUBENDPOINTS.itemSubcategory}`,
+    getByName: `${API_SUBENDPOINTS.itemSubcategory}/get`,
     delete: (id: number) => `${API_SUBENDPOINTS.itemSubcategory}/${id}`,
   },
   report: {
     create: `${API_SUBENDPOINTS.report}`,
     update: `${API_SUBENDPOINTS.report}`,
     search: `${API_SUBENDPOINTS.report}`,
+    getById: (id: number) => `${API_SUBENDPOINTS.report}/${id}`,
+    getLast: `${API_SUBENDPOINTS.report}/get-last`,
     delete: (id: number) => `${API_SUBENDPOINTS.report}/${id}`,
   },
 };

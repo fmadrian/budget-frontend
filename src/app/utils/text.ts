@@ -46,6 +46,8 @@ const APP_TEXT: TextDictionary = {
       btnShow: 'SHOW',
       msgReportDeleted: (name: string) => `Report ${name} deleted.`,
       msgCopyFailed: `Couldn't copy report.`,
+      msgReportCreated: (name: string) => `Report ${name} created.`,
+      msgReportUpdated: (name: string) => `Report ${name} updated.`,
     },
     searchReport: {
       lblRange: 'SINCE (MM/DD/YYYY) – UNTIL (MM/DD/YYYY)',
@@ -114,6 +116,8 @@ const APP_TEXT: TextDictionary = {
       btnShow: 'MOSTRAR',
       msgReportDeleted: (name: string) => `Reporte ${name} eliminado.`,
       msgCopyFailed: `No se pudo copiar el reporte.`,
+      msgReportCreated: (name: string) => `Reporte ${name} creado.`,
+      msgReportUpdated: (name: string) => `Reporte ${name} actualizado.`,
     },
     searchReport: {
       lblRange: 'DESDE (MM/DD/AAAA) – HASTA (MM/DD/AAAA)',

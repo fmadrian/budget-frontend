@@ -1,0 +1,89 @@
+<ng-container>
+  <div [hidden]="isLoading">
+    <!-- Sortable table -->
+    <table
+      mat-table
+      matSort
+      [dataSource]="datasource"
+      class="mat-elevation-z8 results-table"
+    >
+      <!-- Report name -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ GET_APP_TEXT("reportResults", "lblName") }}
+        </th>
+        <td mat-cell *matCellDef="let report">
+          {{ report.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ GET_APP_TEXT("reportResults", "lblDate") }}
+        </th>
+        <td mat-cell *matCellDef="let report">
+          {{ formatDate(report.date) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="income">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ GET_APP_TEXT("reportResults", "lblIncome") }}
+        </th>
+        <td mat-cell *matCellDef="let report">
+          {{ report.income }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expenses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ GET_APP_TEXT("reportResults", "lblExpenses") }}
+        </th>
+        <td mat-cell *matCellDef="let report">
+          {{ report.expenses }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ GET_APP_TEXT("reportResults", "lblTotal") }}
+        </th>
+        <td mat-cell *matCellDef="let report">
+          {{ report.total }}
+        </td>
+      </ng-container>
+
+      <!-- Update button -->
+      <ng-container matColumnDef="updateButton">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let report">
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/'.concat(APP_ROUTES.report.update_id(report.id))]"
+          >
+            {{ GET_APP_TEXT("reportResults", "btnUpdate") }}
+          </a>
+        </td>
+      </ng-container>
+      <!-- Copy button -->
+      <ng-container matColumnDef="copyButton">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let report">
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/'.concat(APP_ROUTES.report.create)]"
+            [queryParams]="{ copy_id: report.id }"
+          >
+            {{ GET_APP_TEXT("reportResults", "btnCopy") }}
+          </a>
+        </td>
+      </ng-container>
+
+      <!-- Header row and row definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</ng-container>

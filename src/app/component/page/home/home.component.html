@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="mat-typography item title">
+    <h1>{{ GET_APP_TEXT("app", "name") }}</h1>
+  </div>
+  <button
+    mat-flat-button
+    class="item"
+    color="primary"
+    type="button"
+    (click)="createReport()"
+  >
+    {{ GET_APP_TEXT("home", "btnCreateReport") }}
+  </button>
+  <button
+    mat-flat-button
+    class="item"
+    color="primary"
+    type="button"
+    (click)="searchReport()"
+  >
+    {{ GET_APP_TEXT("home", "btnSearchReport") }}
+  </button>
+  <button
+    mat-flat-button
+    class="item"
+    color="primary"
+    type="button"
+    (click)="createReportBlank()"
+  >
+    {{ GET_APP_TEXT("home", "btnCreateReportBlank") }}
+  </button>
+</div>

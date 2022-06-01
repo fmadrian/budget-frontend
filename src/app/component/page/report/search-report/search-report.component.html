@@ -1,0 +1,54 @@
+<div class="content">
+  <div class="mat-typography">
+    <h2>{{ GET_APP_TEXT("searchReport", "lblSearchReport") }}</h2>
+  </div>
+  <!-- Search form -->
+  <form [formGroup]="searchForm">
+    <!-- Name -->
+    <mat-form-field class="item" appearance="fill">
+      <mat-label>{{ GET_APP_TEXT("searchReport", "lblName") }}</mat-label>
+      <input matInput [formControlName]="'name'" type="text" />
+    </mat-form-field>
+    <!-- Date range -->
+    <mat-form-field class="item" appearance="fill">
+      <mat-label>{{ GET_APP_TEXT("searchReport", "lblDate") }}</mat-label>
+      <mat-date-range-input
+        [rangePicker]="dateRangePicker"
+        [comparisonStart]="this.searchForm.get('since')?.value"
+        [comparisonEnd]="this.searchForm.get('until')?.value"
+      >
+        <input
+          matStartDate
+          readonly
+          placeholder="{{ GET_APP_TEXT('searchReport', 'lblStartDate') }}"
+          [formControlName]="'since'"
+        />
+        <input
+          matEndDate
+          readonly
+          placeholder="{{ GET_APP_TEXT('searchReport', 'lblEndDate') }}"
+          [formControlName]="'until'"
+        />
+      </mat-date-range-input>
+      <mat-hint>{{ GET_APP_TEXT("searchReport", "lblRange") }}</mat-hint>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="dateRangePicker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+    </mat-form-field>
+
+    <!-- Button -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="item"
+      type="button"
+      (click)="search()"
+    >
+      {{ GET_APP_TEXT("searchReport", "btnSearch") }}
+    </button>
+  </form>
+  <mat-divider class="divider"></mat-divider>
+  <app-report-table [reports]="reports"></app-report-table>
+</div>

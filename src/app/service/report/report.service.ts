@@ -63,11 +63,11 @@ export class ReportService {
     observ = observ.pipe(
       map((report) => {
         let result: ReportResponse = {
-          date: report.date,
+          name: '',
+          date: '',
+          items: [...this.itemService.itemsToZero(report.items)],
           expenses: 0,
           income: 0,
-          items: [...this.itemService.itemsToZero(report.items)],
-          name: report.name,
           total: 0,
         };
         // Remove id and put items without total.
@@ -83,8 +83,22 @@ export class ReportService {
       id: report.id,
       name: report.name,
       date: report.date,
-      items: this.itemService.mapItems(report.items),
+      items: [...this.itemService.mapItems(report.items)],
     };
     return request;
+  }
+  // Gets totals (total, income, expenses) in the report.
+  calculateTotals(report: ReportResponse) {
+    report.income = report.items
+      .filter((item) => item.income)
+      .map((item) => item.total)
+      .reduce((total1, total2) => total1 + total2, 0);
+    report.expenses = report.items
+      .filter((item) => item.income === false)
+      .map((item) => item.total)
+      .reduce((total1, total2) => total1 + total2, 0);
+    report.total = report.income - report.expenses;
+
+    return report;
   }
 }

@@ -89,16 +89,19 @@ export class ReportService {
   }
   // Gets totals (total, income, expenses) in the report.
   calculateTotals(report: ReportResponse) {
-    report.income = report.items
-      .filter((item) => item.income)
-      .map((item) => item.total)
-      .reduce((total1, total2) => total1 + total2, 0);
-    report.expenses = report.items
-      .filter((item) => item.income === false)
-      .map((item) => item.total)
-      .reduce((total1, total2) => total1 + total2, 0);
-    report.total = report.income - report.expenses;
+    // Reset the values, then calculate the new totals.
+    report.income = 0;
+    report.expenses = 0;
+    report.items.map((item) => {
+      if (item.income) {
+        report.income += item.total;
+      } else {
+        report.expenses += item.total;
+      }
+      return item;
+    });
 
+    report.total = report.income - report.expenses;
     return report;
   }
 }

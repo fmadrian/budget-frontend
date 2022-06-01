@@ -1,0 +1,56 @@
+<div class="item-bar">
+  <ng-container>
+    <form [formGroup]="itemForm">
+      <!-- Expense or income slide-->
+      <mat-slide-toggle class="item-slider" formControlName="isIncome">{{
+        GET_APP_TEXT(
+          "itemBar",
+          "btnIsIncome"
+        )(this.itemForm.get("isIncome")?.value)
+      }}</mat-slide-toggle>
+
+      <!-- Subcategory -->
+      <mat-form-field class="item" appearance="fill">
+        <mat-label>{{ GET_APP_TEXT("itemBar", "lblSubcategory") }}</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControlName]="'subcategoryName'"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let subcategory of subcategories$ | async"
+            [value]="subcategory.name"
+            (click)="selectSubcategory(subcategory)"
+          >
+            {{ subcategory.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Amount -->
+      <mat-form-field class="item" appearance="fill">
+        <mat-label>{{ GET_APP_TEXT("itemBar", "lblTotal") }}</mat-label>
+        <input matInput [formControlName]="'total'" type="number" />
+      </mat-form-field>
+
+      <!-- Notes -->
+      <mat-form-field class="item" appearance="fill">
+        <mat-label>{{ GET_APP_TEXT("itemBar", "lblNotes") }}</mat-label>
+        <textarea matInput [formControlName]="'notes'"></textarea>
+      </mat-form-field>
+
+      <!-- Button -->
+      <button
+        mat-flat-button
+        class="item"
+        color="primary"
+        type="button"
+        (click)="add()"
+      >
+        {{ GET_APP_TEXT("itemBar", "btnAdd") }}
+      </button>
+    </form>
+  </ng-container>
+</div>

@@ -9,10 +9,10 @@ interface TextDictionary {
 const APP_TEXT: TextDictionary = {
   en: {
     app: {
-      name: 'Expense Tracker',
+      name: 'Budget Tracker',
     },
     home: {
-      btnCreateReport: 'CREATE NEW REPORT',
+      btnCreateReport: 'CREATE NEW REPORT (COPY LAST)',
       btnCreateReportBlank: 'CREATE NEW REPORT (BLANK)',
       btnSearchReport: 'SEARCH REPORT',
     },
@@ -37,16 +37,24 @@ const APP_TEXT: TextDictionary = {
       lblTotal: 'TOTAL: ',
       btnSave: 'SAVE',
       btnBack: 'EXIT',
-      lblDate: 'DATE',
+      lblDate: 'REPORT DATE',
       lblDateHint: 'MM/DD/YYYY',
+      lblName: 'REPORT NAME',
+      lblAddItems: 'ADD ITEM TO REPORT',
+      lblReportData: 'REPORT INFORMATION',
+      btnHide: 'HIDE',
+      btnShow: 'SHOW',
+      msgReportDeleted: (name: string) => `Report ${name} deleted.`,
+      msgCopyFailed: `Couldn't copy report.`,
     },
     searchReport: {
       lblRange: 'SINCE (MM/DD/YYYY) – UNTIL (MM/DD/YYYY)',
-      lblDate: 'DATE',
-      lblName: 'NAME',
+      lblDate: 'REPORT DATE',
+      lblName: 'REPORT NAME',
       lblStartDate: 'SINCE (DATE)',
       lblEndDate: 'UNTIL (DATE)',
-      btnSearch: 'SEARCH REPORT',
+      btnSearch: 'SEARCH',
+      lblSearchReport: 'SEARCH REPORT',
     },
     reportResults: {
       lblName: 'NAME',
@@ -58,13 +66,21 @@ const APP_TEXT: TextDictionary = {
       btnUpdate: 'UPDATE',
       btnCopy: 'COPY',
     },
+    snackbar: {
+      btnOK: 'OK',
+      error: (msg: string) => `ERROR: ${msg}`,
+    },
+    error: {
+      internal: `Internal error.`,
+      notFound: 'Site not found.',
+    },
   },
   es: {
     app: {
       name: 'Expense Tracker',
     },
     home: {
-      btnCreateReport: 'CREAR NUEVO REPORTE',
+      btnCreateReport: 'CREAR NUEVO REPORTE (COPIA DE ÚLTIMO)',
       btnCreateReportBlank: 'CREAR NUEVO REPORTE (DESDE CERO)',
       btnSearchReport: 'BUSCAR REPORTE',
     },
@@ -89,16 +105,24 @@ const APP_TEXT: TextDictionary = {
       lblTotal: 'TOTAL: ',
       btnSave: 'GUARDAR',
       btnBack: 'SALIR',
-      lblDate: 'FECHA',
+      lblDate: 'FECHA DE REPORTE',
       lblDateHint: 'MM/DD/AAAA',
+      lblName: 'NOMBRE DE REPORTE',
+      lblAddItems: 'AÑADIR ITEM A REPORTE',
+      lblReportData: 'INFORMACIÓN DE REPORTE',
+      btnHide: 'OCULTAR',
+      btnShow: 'MOSTRAR',
+      msgReportDeleted: (name: string) => `Reporte ${name} eliminado.`,
+      msgCopyFailed: `No se pudo copiar el reporte.`,
     },
     searchReport: {
       lblRange: 'DESDE (MM/DD/AAAA) – HASTA (MM/DD/AAAA)',
-      lblDate: 'FECHA',
-      lblName: 'NOMBRE',
+      lblDate: 'FECHA DE REPORTE',
+      lblName: 'NOMBRE DE REPORTE',
       lblStartDate: 'DESDE (FECHA)',
       lblEndDate: 'HASTA (FECHA)',
-      btnSearch: 'BUSCAR REPORTE',
+      btnSearch: 'BUSCAR',
+      lblSearchReport: 'BUSCAR REPORTE',
     },
     reportResults: {
       lblName: 'NOMBRE',
@@ -109,6 +133,14 @@ const APP_TEXT: TextDictionary = {
       btnDelete: 'BORRAR REPORTE',
       btnUpdate: 'MODIFICAR REPORTE',
       btnCopy: 'COPIAR REPORTE',
+    },
+    snackbar: {
+      btnOK: 'OK',
+      error: (msg: string) => `ERROR: ${msg}`,
+    },
+    error: {
+      internal: `Error interno.`,
+      notFound: 'Contenido no existe.',
     },
   },
 };

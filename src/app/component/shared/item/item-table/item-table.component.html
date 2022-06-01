@@ -1,0 +1,127 @@
+<ng-container>
+  <div [hidden]="isLoading">
+    <form [formGroup]="itemsForm">
+      <!-- Sortable table -->
+      <table
+        mat-table
+        matSort
+        [dataSource]="datasource"
+        class="mat-elevation-z8 items-table"
+      >
+        <!-- Subcategory -->
+        <ng-container matColumnDef="subcategory">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ GET_APP_TEXT("reportTable", "lblSubcategory") }}
+          </th>
+          <td mat-cell *matCellDef="let item">{{ item.subcategory.name }}</td>
+        </ng-container>
+        <!-- Amount / total -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ GET_APP_TEXT("reportTable", "lblTotal") }}
+          </th>
+          <!-- Can make changes over the field when the item is selected. -->
+          <td mat-cell *matCellDef="let item">
+            <ng-template
+              [ngIf]="item !== this.itemSelected"
+              [ngIfElse]="editTotal"
+            >
+              {{ item.total }}
+            </ng-template>
+            <ng-template #editTotal>
+              <input
+                matInput
+                [formControlName]="'total'"
+                type="number"
+                (change)="formChanges()"
+                value="{{ itemSelected?.total }}"
+              />
+            </ng-template>
+          </td>
+        </ng-container>
+        <!-- Delete button -->
+        <ng-container matColumnDef="deleteButton">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let item">
+            <div *ngIf="showDeleteButton">
+              <button
+                type="button"
+                mat-button
+                color="primary"
+                (click)="delete(item)"
+              >
+                {{ GET_APP_TEXT("reportTable", "btnDelete") }}
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <!-- Notes -->
+        <ng-container matColumnDef="notes">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ GET_APP_TEXT("reportTable", "lblNotes") }}
+          </th>
+          <td mat-cell *matCellDef="let item">
+            <ng-template
+              [ngIf]="item !== this.itemSelected"
+              [ngIfElse]="editNotes"
+            >
+              <textarea matInput readonly>{{ item.notes }} </textarea>
+            </ng-template>
+            <ng-template #editNotes>
+              <textarea
+                matInput
+                [formControlName]="'notes'"
+                (change)="formChanges()"
+                >{{ itemSelected?.notes }} </textarea
+              >
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <!-- Rearrange order buttons-->
+        <!-- Upward button -->
+        <ng-container matColumnDef="upButton">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let item">
+            <div *ngIf="showDeleteButton">
+              <button
+                type="button"
+                mat-icon-button
+                color="primary"
+                (click)="rearrangeItem(item, 'up')"
+              >
+                <mat-icon>arrow_upward</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <!-- Downward button -->
+        <ng-container matColumnDef="downButton">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let item">
+            <div *ngIf="showDeleteButton">
+              <button
+                type="button"
+                mat-icon-button
+                color="primary"
+                (click)="rearrangeItem(item, 'down')"
+              >
+                <mat-icon>arrow_downward</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <!-- Header row and row definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <!-- (click)= event triggered by a click on the table -->
+        <!-- [class.conditional-class]= class used on a element only when certain condition are fullfilled-->
+        <tr
+          mat-row
+          (click)="selectItem(row)"
+          [class.clicked-row]="row === itemSelected"
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+      </table>
+    </form>
+  </div>
+</ng-container>

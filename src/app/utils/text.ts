@@ -48,6 +48,10 @@ const APP_TEXT: TextDictionary = {
       msgCopyFailed: `Couldn't copy report.`,
       msgReportCreated: (name: string) => `Report ${name} created.`,
       msgReportUpdated: (name: string) => `Report ${name} updated.`,
+      btnDelete: 'DELETE REPORT',
+      lblDeleteTitle: 'WARNING!',
+      lblDeleteMessage: (name: string) =>
+        `Do you want to DELETE the REPORT '${name}'? You CAN'T UNDO THIS ACTION.`,
     },
     searchReport: {
       lblRange: 'SINCE (MM/DD/YYYY) – UNTIL (MM/DD/YYYY)',
@@ -75,6 +79,10 @@ const APP_TEXT: TextDictionary = {
     error: {
       internal: `Internal error.`,
       notFound: 'Site not found.',
+    },
+    confirmationDialog: {
+      btnYes: 'YES',
+      btnNo: 'NO',
     },
   },
   es: {
@@ -118,6 +126,10 @@ const APP_TEXT: TextDictionary = {
       msgCopyFailed: `No se pudo copiar el reporte.`,
       msgReportCreated: (name: string) => `Reporte ${name} creado.`,
       msgReportUpdated: (name: string) => `Reporte ${name} actualizado.`,
+      btnDelete: 'BORRAR REPORTE',
+      lblDeleteTitle: '¡ALERTA!',
+      lblDeleteMessage: (name: string) =>
+        `¿Desea BORRAR el REPORTE '${name}'?Esta acción NO SE PUEDE DESHACER.`,
     },
     searchReport: {
       lblRange: 'DESDE (MM/DD/AAAA) – HASTA (MM/DD/AAAA)',
@@ -145,6 +157,10 @@ const APP_TEXT: TextDictionary = {
     error: {
       internal: `Error interno.`,
       notFound: 'Contenido no existe.',
+    },
+    confirmationDialog: {
+      btnYes: 'SI',
+      btnNo: 'NO',
     },
   },
 };

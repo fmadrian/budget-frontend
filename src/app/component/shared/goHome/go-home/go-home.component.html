@@ -1,0 +1,14 @@
+<ng-container>
+  <div [hidden]="isHome()">
+    <a
+      class="item"
+      mat-flat-button
+      router
+      [routerLink]="['/'.concat(APP_ROUTES.home)]"
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+      {{ GET_APP_TEXT("report", "btnBack") }}</a
+    >
+    <mat-divider class="item"></mat-divider>
+  </div>
+</ng-container>

@@ -1,0 +1,25 @@
+.submit-button {
+  margin-top: 10px;
+  width: 100%;
+}
+.date-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+}
+.item {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.item-header {
+  $item-margin: 5px;
+  display: inline;
+  .title {
+    margin-right: $item-margin;
+    font-weight: bold;
+  }
+  .toggle-button {
+    margin-top: $item-margin;
+    margin-bottom: $item-margin;
+  }
+}

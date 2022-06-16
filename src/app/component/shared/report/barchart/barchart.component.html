@@ -1,0 +1,10 @@
+<div id="{{ chartName }}"></div>
+<mat-divider></mat-divider>
+<!-- Glossary -->
+<div class="mat-typography">
+  <span *ngFor="let item of summary">
+    <mat-icon [ngStyle]="{ color: item.color }">lens</mat-icon>
+    {{ item.subgroup }}
+  </span>
+</div>
+<mat-divider></mat-divider>

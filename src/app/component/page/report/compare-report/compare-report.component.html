@@ -1,0 +1,36 @@
+<div>
+  <mat-tab-group>
+    <mat-tab label="{{ GET_APP_TEXT('compareReport', 'lblCharts') }}">
+      <h2>{{ GET_APP_TEXT("compareReport", "lblExpensesChart") }}</h2>
+      <app-barchart
+        [reports]="dataExpenses"
+        [subgroups]="reportItemsExpenses"
+        [maxY]="maxValueExpenses"
+        [chartName]="'expensesChart'"
+      ></app-barchart>
+      <mat-divider></mat-divider>
+      <h2>{{ GET_APP_TEXT("compareReport", "lblIncomeChart") }}</h2>
+      <app-barchart
+        [reports]="dataIncome"
+        [subgroups]="reportItemsIncome"
+        [maxY]="maxValueIncome"
+        [chartName]="'incomeChart'"
+      ></app-barchart>
+    </mat-tab>
+    <mat-tab label="{{ GET_APP_TEXT('compareReport', 'lblTables') }}">
+      <h2>{{ GET_APP_TEXT("compareReport", "lblExpensesTable") }}</h2>
+      <app-comparison-table
+        [subgroups]="reportItemsExpenses"
+        [reportJSON]="dataExpenses"
+      >
+      </app-comparison-table>
+      <mat-divider></mat-divider>
+      <h2>{{ GET_APP_TEXT("compareReport", "lblIncomeTable") }}</h2>
+      <app-comparison-table
+        [subgroups]="reportItemsIncome"
+        [reportJSON]="dataIncome"
+      >
+      </app-comparison-table
+    ></mat-tab>
+  </mat-tab-group>
+</div>

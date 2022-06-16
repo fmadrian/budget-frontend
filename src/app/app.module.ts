@@ -25,12 +25,17 @@ import { InternalErrorComponent } from './component/page/internal-error/internal
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GoHomeComponent } from './component/shared/goHome/go-home/go-home.component';
 import { ItemBarComponent } from './component/shared/item/item-bar/item-bar.component';
 import { ItemTableComponent } from './component/shared/item/item-table/item-table.component';
 import { ReportTableComponent } from './component/shared/report/report-table/report-table.component';
 import { ConfirmationDialogComponent } from './component/shared/dialog/confirmation-dialog/confirmation-dialog.component';
+import { CompareReportComponent } from './component/page/report/compare-report/compare-report.component';
+import { BarchartComponent } from './component/shared/report/barchart/barchart.component';
+import { ComparisonTableComponent } from './component/shared/report/comparison-table/comparison-table.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +49,9 @@ import { ConfirmationDialogComponent } from './component/shared/dialog/confirmat
     ItemTableComponent,
     ReportTableComponent,
     ConfirmationDialogComponent,
+    CompareReportComponent,
+    BarchartComponent,
+    ComparisonTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +76,8 @@ import { ConfirmationDialogComponent } from './component/shared/dialog/confirmat
     MatMomentDateModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatTabsModule,
+    MatCheckboxModule,
   ],
   providers: [
     {

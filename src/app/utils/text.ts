@@ -61,6 +61,7 @@ const APP_TEXT: TextDictionary = {
       lblEndDate: 'UNTIL (DATE)',
       btnSearch: 'SEARCH',
       lblSearchReport: 'SEARCH REPORT',
+      btnCompare: 'COMPARE',
     },
     reportResults: {
       lblName: 'NAME',
@@ -71,6 +72,17 @@ const APP_TEXT: TextDictionary = {
       btnDelete: 'DELETE',
       btnUpdate: 'UPDATE',
       btnCopy: 'COPY',
+    },
+    compareReport: {
+      lblExpensesChart: 'Bar chart (Expenses)',
+      lblIncomeChart: 'Bar chart (Income)',
+      lblExpensesTable: 'Comparison table (Expenses)',
+      lblIncomeTable: 'Comparison table (Income)',
+      lblCharts: 'Bar charts (income and expenses)',
+      lblTables: 'Comparison tables (income and expenses)',
+    },
+    comparisonTable: {
+      lblItem: 'Item | Reports',
     },
     snackbar: {
       btnOK: 'OK',
@@ -139,6 +151,7 @@ const APP_TEXT: TextDictionary = {
       lblEndDate: 'HASTA (FECHA)',
       btnSearch: 'BUSCAR',
       lblSearchReport: 'BUSCAR REPORTE',
+      btnCompare: 'COMPARAR REPORTES',
     },
     reportResults: {
       lblName: 'NOMBRE',
@@ -149,6 +162,17 @@ const APP_TEXT: TextDictionary = {
       btnDelete: 'BORRAR REPORTE',
       btnUpdate: 'MODIFICAR REPORTE',
       btnCopy: 'COPIAR REPORTE',
+    },
+    compareReport: {
+      lblExpensesChart: 'GRÁFICO (GASTOS)',
+      lblIncomeChart: 'GRÁFICO (INGRESOS)',
+      lblExpensesTable: 'TABLA COMPARACION (GASTOS)',
+      lblIncomeTable: 'TABLA COMPARACION (INGRESOS)',
+      lblCharts: 'GRÁFICOS (INGRESOS Y GASTOS)',
+      lblTables: 'TABLAS COMPARACIÓN (INGRESOS Y GASTOS)',
+    },
+    comparisonTable: {
+      lblItem: 'ITEM | REPORTE ->',
     },
     snackbar: {
       btnOK: 'OK',

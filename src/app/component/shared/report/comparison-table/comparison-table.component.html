@@ -1,0 +1,20 @@
+<div>
+  <table>
+    <tr>
+      <th>{{ GET_APP_TEXT("comparisonTable", "lblItem") }}</th>
+      <th *ngFor="let report of reports">
+        {{ report.name }}
+      </th>
+    </tr>
+    <tr *ngFor="let subgroup of subgroups">
+      <!-- Item or subgroup name-->
+      <td class="item">
+        {{ subgroup }}
+      </td>
+      <!-- Value -->
+      <td *ngFor="let report of reports">
+        {{ report[subgroup] }}
+      </td>
+    </tr>
+  </table>
+</div>

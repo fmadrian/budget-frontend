@@ -27,6 +27,7 @@ export class ItemService {
   // Reset the total and notes of an item.
   itemsToZero(items: ItemResponse[]) {
     return items.map((item) => {
+      item.id = undefined;
       item.total = 0;
       item.notes = '';
       return item;

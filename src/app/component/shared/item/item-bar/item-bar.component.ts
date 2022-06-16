@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, of, throwError } from 'rxjs';
+import { defer, Observable, of, throwError } from 'rxjs';
 import {
   ItemSubcategoryRequest,
   ItemSubcategoryResponse,
@@ -74,48 +74,65 @@ export class ItemBarComponent implements OnInit {
     if (this.itemForm.valid) {
       // Get the name.
       let name = this.itemForm.get('subcategoryName')?.value;
-      if (
-        this.subcategorySelected === null &&
-        this.itemForm.get('subcategoryName')?.value.toString().trim() !== ''
-      ) {
-        // Search a category and assign it.
-        this.itemSubcategoryService.getByName(name).subscribe(
-          (data) => {
-            this.subcategorySelected = data;
-          },
-          (error) => {
-            // Don't throw an error if the query didn't find any subcategory.
-            if (error.status !== 404) {
-              throwError(error);
-            }
+      defer(() => {
+        if (
+          this.subcategorySelected === null &&
+          name.toString().trim() !== ''
+        ) {
+          // Search a category and assign it.
+          return this.itemSubcategoryService.getByName(name).pipe(
+            catchError((error) => {
+              if (error.status !== 404) {
+                return throwError(error);
+              }
+              // Create a category if it doesn't exist
+              return this.itemSubcategoryService.create({
+                name,
+              });
+            })
+          );
+        } else {
+          return of(this.subcategorySelected);
+        }
+      }).subscribe(
+        (data) => {
+          this.subcategorySelected = data;
+          // Once we have the subcategory, we can create the item.
+          if (this.subcategorySelected) {
+            let newItem: ItemResponse = {
+              subcategory: this.subcategorySelected,
+              total: this.itemForm.get('total')?.value,
+              income: this.itemForm.get('isIncome')?.value,
+              notes: this.itemForm.get('notes')?.value,
+            };
+            this.itemOutput.next(newItem);
           }
-        );
-      }
-      // If it's still null is because the category doesn't exist.
-      // Therefore, we have to create it and assign it as the subcategory selected.
-      if (this.subcategorySelected === null) {
-        let newSubcategory: ItemSubcategoryRequest = {
-          name,
-        };
-        this.itemSubcategoryService.create(newSubcategory).subscribe(
-          (data) => {
-            this.subcategorySelected = data;
-          },
-          (error) => {
-            this.snackbarService.error(error);
+        },
+        (error) => {
+          this.snackbarService.error(error);
+        }
+      );
+    }
+  }
+  private getSubc(name = '') {
+    if (this.subcategorySelected === null && name.toString().trim() !== '') {
+      // Search a category and assign it.
+      this.itemSubcategoryService.getByName(name).pipe(
+        catchError((error) => {
+          if (error.status !== 404) {
+            return throwError(error);
           }
-        );
-      }
-
-      if (this.subcategorySelected !== null && this.subcategorySelected.id) {
-        let newItem: ItemResponse = {
-          subcategory: this.subcategorySelected,
-          total: this.itemForm.get('total')?.value,
-          income: this.itemForm.get('isIncome')?.value,
-          notes: this.itemForm.get('notes')?.value,
-        };
-        this.itemOutput.next(newItem);
-      }
+          // Create a category if it doesn't exist
+          return this.itemSubcategoryService.create({
+            name,
+          });
+        }),
+        switchMap((data) => {
+          // Assign the subcategory created as subcategory selected.
+          this.subcategorySelected = data;
+          return of();
+        })
+      );
     }
   }
 }

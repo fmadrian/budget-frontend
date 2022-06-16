@@ -48,7 +48,21 @@
     >
       {{ GET_APP_TEXT("searchReport", "btnSearch") }}
     </button>
+    <!-- Button -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="item"
+      type="button"
+      disabled="{{ selectedReports.length <= 0 }}"
+      (click)="compare()"
+    >
+      {{ GET_APP_TEXT("searchReport", "btnCompare") }}
+    </button>
   </form>
   <mat-divider class="divider"></mat-divider>
-  <app-report-table [reports]="reports"></app-report-table>
+  <app-report-table
+    [reports]="reports"
+    (reportsSelected)="changeSelectedReports($event)"
+  ></app-report-table>
 </div>

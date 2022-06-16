@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ReportResponse } from 'src/app/payload/report/report.payload';
 import { ReportService } from 'src/app/service/report/report.service';
 import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
+import { APP_ROUTES } from 'src/app/utils/appRoutes';
 import { GET_APP_TEXT } from 'src/app/utils/text';
 
 @Component({
@@ -15,10 +17,12 @@ export class SearchReportComponent implements OnInit {
   GET_APP_TEXT = GET_APP_TEXT;
   searchForm: FormGroup;
   reports: ReportResponse[] = [];
+  selectedReports: ReportResponse[] = []; // Reports selected in the results table.
   constructor(
     private formBuilder: FormBuilder,
     private reportService: ReportService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private router: Router
   ) {
     this.searchForm = this.formBuilder.group({});
   }
@@ -50,5 +54,16 @@ export class SearchReportComponent implements OnInit {
         this.snackbarService.error(error);
       }
     );
+  }
+  changeSelectedReports(data: ReportResponse[]) {
+    this.selectedReports = data;
+  }
+  compare() {
+    const ids = this.selectedReports.map((report) => report.id?.toString());
+    this.router.navigate([APP_ROUTES.report.compare], {
+      queryParams: {
+        ids: [...ids].toString(),
+      },
+    });
   }
 }

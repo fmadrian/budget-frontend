@@ -2,9 +2,11 @@
 
 ## Description
 
-[Budget](https://github.com/fsv2860/budget) is a web application that allows users to create, manipulate, and compare budgets.
+[Project description](https://github.com/fsv2860/budget)
 
-This repository contains the application's frontend files necessary to deploy it.
+[Backend repository](https://github.com/fsv2860/budget-backend)
+
+This repository contains the instructions to install the application's frontend.
 
 ## Local deployment
 

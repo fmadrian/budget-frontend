@@ -48,7 +48,3 @@ ng serve
 [Angular Material](https://material.angular.io/)
 
 [D3.js](https://d3js.org/)
-
-## See also
-
-[budget - Backend code](https://github.com/fsv2860/budget-backend)

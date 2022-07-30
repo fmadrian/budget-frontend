@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
     create: `${API_SUBENDPOINTS.report}`,
     update: `${API_SUBENDPOINTS.report}`,
     search: `${API_SUBENDPOINTS.report}`,
+    searchSize: `${API_SUBENDPOINTS.report}/search-size`,
     getById: (id: number) => `${API_SUBENDPOINTS.report}/${id}`,
     getLast: `${API_SUBENDPOINTS.report}/get-last`,
     delete: (id: number) => `${API_SUBENDPOINTS.report}/${id}`,

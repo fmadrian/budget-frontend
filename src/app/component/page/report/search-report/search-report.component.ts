@@ -7,6 +7,8 @@ import { ReportService } from 'src/app/service/report/report.service';
 import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
 import { APP_ROUTES } from 'src/app/utils/appRoutes';
 import { GET_APP_TEXT } from 'src/app/utils/text';
+import { switchMap } from 'rxjs/operators';
+import { PaginationResponse } from 'src/app/payload/pagination/pagination-payload';
 
 @Component({
   selector: 'app-search-report',
@@ -18,6 +20,7 @@ export class SearchReportComponent implements OnInit {
   searchForm: FormGroup;
   reports: ReportResponse[] = [];
   selectedReports: ReportResponse[] = []; // Reports selected in the results table.
+  paginationData: PaginationResponse | null = null;
   constructor(
     private formBuilder: FormBuilder,
     private reportService: ReportService,
@@ -46,14 +49,24 @@ export class SearchReportComponent implements OnInit {
 
     let since = this.searchForm.get('since')?.value.toISOString();
     let until = this.searchForm.get('until')?.value.toISOString();
-    this.reportService.search(name, since, until).subscribe(
-      (data) => {
-        this.reports = data;
-      },
-      (error) => {
-        this.snackbarService.error(error);
-      }
-    );
+    // Get total items and pages and then get the items.
+
+    this.reportService
+      .searchSize(name, since, until)
+      .pipe(
+        switchMap((result) => {
+          this.paginationData = result;
+          return this.reportService.search(name, since, until);
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.reports = data;
+        },
+        (error) => {
+          this.snackbarService.error(error);
+        }
+      );
   }
   changeSelectedReports(data: ReportResponse[]) {
     this.selectedReports = data;

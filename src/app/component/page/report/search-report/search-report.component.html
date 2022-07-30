@@ -63,6 +63,7 @@
   <mat-divider class="divider"></mat-divider>
   <app-report-table
     [reports]="reports"
+    [paginationData]="paginationData"
     (reportsSelected)="changeSelectedReports($event)"
   ></app-report-table>
 </div>

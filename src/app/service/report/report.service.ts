@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PaginationResponse } from 'src/app/payload/pagination/pagination-payload';
 import {
   ReportRequest,
   ReportResponse,
@@ -30,14 +31,57 @@ export class ReportService {
       payload
     );
   }
-  search(name: string = '', since: string, until: string) {
+  search(
+    name: string = '',
+    since: string,
+    until: string,
+    page: number | null = null,
+    items: number | null = null
+  ) {
+    let params: {
+      name: string;
+      since: string;
+      until: string;
+      page?: number;
+      items?: number;
+    } = {
+      name,
+      since,
+      until,
+    };
+    if (page !== null && items !== null) {
+      params = { ...params, page, items };
+    }
     return this.httpClient.get<ReportResponse[]>(API_ENDPOINTS.report.search, {
-      params: {
-        name,
-        since,
-        until,
-      },
+      params,
     });
+  }
+  // Returns the size of a serch query.
+  searchSize(
+    name: string = '',
+    since: string,
+    until: string,
+    items: number | null = null
+  ) {
+    let params: {
+      name: string;
+      since: string;
+      until: string;
+      items?: number;
+    } = {
+      name,
+      since,
+      until,
+    };
+    if (items !== null) {
+      params = { ...params, items };
+    }
+    return this.httpClient.get<PaginationResponse>(
+      API_ENDPOINTS.report.searchSize,
+      {
+        params,
+      }
+    );
   }
   get(id: number) {
     return this.httpClient.get<ReportResponse>(

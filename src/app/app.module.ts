@@ -36,6 +36,7 @@ import { CompareReportComponent } from './component/page/report/compare-report/c
 import { BarchartComponent } from './component/shared/report/barchart/barchart.component';
 import { ComparisonTableComponent } from './component/shared/report/comparison-table/comparison-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +79,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatPaginatorModule,
   ],
   providers: [
     {
